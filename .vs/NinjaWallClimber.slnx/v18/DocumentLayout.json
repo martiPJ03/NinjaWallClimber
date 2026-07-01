@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\marti.DESKTOP-HBVCDFL\\OneDrive\\Escritorio\\Coses Videojoc\\UnityProjectes\\NinjaWallClimber\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\marti.desktop-hbvcdfl\\onedrive\\escritorio\\coses videojoc\\unityprojectes\\ninjawallclimber\\assets\\scripts\\playerscripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playerscripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PlayerController.cs",
+              "DocumentMoniker": "C:\\Users\\marti.DESKTOP-HBVCDFL\\OneDrive\\Escritorio\\Coses Videojoc\\UnityProjectes\\NinjaWallClimber\\Assets\\Scripts\\PlayerScripts\\PlayerController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerScripts\\PlayerController.cs",
+              "ToolTip": "C:\\Users\\marti.DESKTOP-HBVCDFL\\OneDrive\\Escritorio\\Coses Videojoc\\UnityProjectes\\NinjaWallClimber\\Assets\\Scripts\\PlayerScripts\\PlayerController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\PlayerScripts\\PlayerController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-01T17:36:12.766Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

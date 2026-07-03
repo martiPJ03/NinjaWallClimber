@@ -11,15 +11,26 @@ public class PlayerController : MonoBehaviour
         Sliding
     }
 
+    [Header("Current State")]
+    [SerializeField] private PlayerState state;
+
+
     [Header("Jumping config")]
     [SerializeField] private float jumpForceX = 4f;
     [SerializeField] private float jumpForceY = 6f;
-    [SerializeField] private float slideSpeed = -2f;
+
+    [Header("Sliding config")]
+    [SerializeField] private float initialSlideSpeed = -1f;
+    [SerializeField] private float maxSlideSpeed = -6f;
+    [SerializeField] private float slideAcceleration = 2f;
+    private float currentSlideSpeed;
+
+    [Header("Input Buffering")]
+    [SerializeField] private float jumpBufferTime = 0.2f;
+    private float jumpBufferTimer;
 
     private Rigidbody2D rb;
     private bool isFacingRight = true;
-    private PlayerState state;
-    private bool shouldJump = false;
 
     void Start()
     {
@@ -27,36 +38,51 @@ public class PlayerController : MonoBehaviour
         state = PlayerState.Idle;
     }
 
-    void Update()
+    private void Update()
     {
+        if (jumpBufferTimer > 0)
+        {
+            jumpBufferTimer -= Time.deltaTime;
+        }
+
         HandleInput();
     }
 
     private void FixedUpdate()
     {
+        bool hasBufferedJump = jumpBufferTimer > 0;
         // Execute the behavior of the current state and evaluate its transitions
         switch (state)
         {
             case PlayerState.Idle:
-                if (shouldJump) Jump();
+                if (hasBufferedJump) Jump();
                 break;
 
             case PlayerState.Jumping:
-                // Transition to falling as soon as gravity starts pulling us down
-                if (rb.linearVelocity.y < 0)
+                if (hasBufferedJump)
+                {
+                    DoubleJump();
+                }
+                    // Transition to falling as soon as gravity starts pulling us down
+                    if (rb.linearVelocity.y < 0)
                 {
                     state = PlayerState.Falling;
                 }
                 break;
 
             case PlayerState.Falling:
+                if (hasBufferedJump)
+                {
+                    DoubleJump();
+                }
                 // No specific physics behavior needed in mid-air falling, 
                 // just waiting for OnCollisionEnter2D to hit a wall.
                 break;
 
             case PlayerState.Sliding:
-                if (shouldJump)
+                if (hasBufferedJump)
                 {
+
                     Jump();
                 }
                 else
@@ -69,10 +95,9 @@ public class PlayerController : MonoBehaviour
 
     private void HandleInput()
     {
-        // Cleaner input checking: You can only jump if you are securely attached to a wall or starting line
-        if (isInputDetected() && (state == PlayerState.Idle || state == PlayerState.Sliding))
+        if (isInputDetected())
         {
-            shouldJump = true;
+            jumpBufferTimer = jumpBufferTime;
         }
     }
 
@@ -83,32 +108,48 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
+        jumpBufferTimer = 0f;
+
         rb.linearVelocity = new Vector2(isFacingRight ? jumpForceX : -jumpForceX, jumpForceY);
         isFacingRight = !isFacingRight;
 
         transform.localScale = new Vector3(isFacingRight ? 1f : -1f, 1f, 1f);
 
-        shouldJump = false;
         state = PlayerState.Jumping;
     }
 
     private void HandleSlidingPhysics()
     {
-        rb.linearVelocity = new Vector2(0f, slideSpeed);
+        currentSlideSpeed = Mathf.MoveTowards(currentSlideSpeed, maxSlideSpeed, slideAcceleration * Time.fixedDeltaTime);
+
+        rb.linearVelocity = new Vector2(0f, currentSlideSpeed);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void DoubleJump()
     {
-        if (collision.gameObject.CompareTag("Wall"))
-        {
-            state = PlayerState.Sliding;
-        }
+        jumpBufferTimer = 0f;
+
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForceY);
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    public void OnWallEnter()
+    {
+        float rawVerticalVelocity = rb.linearVelocity.y;
+        if (rawVerticalVelocity > 0)
+        {
+            currentSlideSpeed = 0;
+        } else
+        {
+            float fallingSpeed = Mathf.Abs(rawVerticalVelocity);
+            currentSlideSpeed = -Mathf.Clamp01(fallingSpeed / 10f) * 3;
+        }
+        state = PlayerState.Sliding;
+    }
+
+    public void OnWallExit()
     {
         // If the player slips off a wall ledge without jumping, drop them straight into falling
-        if (collision.gameObject.CompareTag("Wall") && state == PlayerState.Sliding)
+        if (state == PlayerState.Sliding)
         {
             state = PlayerState.Falling;
         }

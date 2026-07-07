@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,12 +19,16 @@ public class PlayerController : MonoBehaviour
     [Header("Jumping config")]
     [SerializeField] private float jumpForceX = 4f;
     [SerializeField] private float jumpForceY = 6f;
+    private bool hasDoubleJumped = false;
 
     [Header("Sliding config")]
     [SerializeField] private float initialSlideSpeed = -1f;
     [SerializeField] private float maxSlideSpeed = -6f;
     [SerializeField] private float slideAcceleration = 2f;
     private float currentSlideSpeed;
+
+    [Header("Falling config")]
+    [SerializeField] private float fallMultiplier = 2f;
 
     [Header("Input Buffering")]
     [SerializeField] private float jumpBufferTime = 0.2f;
@@ -59,7 +64,7 @@ public class PlayerController : MonoBehaviour
                 break;
 
             case PlayerState.Jumping:
-                if (hasBufferedJump)
+                if (hasBufferedJump && !hasDoubleJumped)
                 {
                     DoubleJump();
                 }
@@ -71,10 +76,12 @@ public class PlayerController : MonoBehaviour
                 break;
 
             case PlayerState.Falling:
-                if (hasBufferedJump)
+                if (hasBufferedJump && !hasDoubleJumped)
                 {
                     DoubleJump();
                 }
+
+                HandleFallingPhysics();
                 // No specific physics behavior needed in mid-air falling, 
                 // just waiting for OnCollisionEnter2D to hit a wall.
                 break;
@@ -118,6 +125,11 @@ public class PlayerController : MonoBehaviour
         state = PlayerState.Jumping;
     }
 
+    private void HandleFallingPhysics()
+    {
+        rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
+    }
+
     private void HandleSlidingPhysics()
     {
         currentSlideSpeed = Mathf.MoveTowards(currentSlideSpeed, maxSlideSpeed, slideAcceleration * Time.fixedDeltaTime);
@@ -127,8 +139,8 @@ public class PlayerController : MonoBehaviour
 
     private void DoubleJump()
     {
+        hasDoubleJumped = true;
         jumpBufferTimer = 0f;
-
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForceY);
     }
 
@@ -148,10 +160,17 @@ public class PlayerController : MonoBehaviour
 
     public void OnWallExit()
     {
+        hasDoubleJumped = false;
         // If the player slips off a wall ledge without jumping, drop them straight into falling
         if (state == PlayerState.Sliding)
         {
             state = PlayerState.Falling;
         }
+    }
+
+    public void Die()
+    {
+        // Handle player death (e.g., reset position, reduce lives, etc.)
+        Debug.Log("Player has died.");
     }
 }

@@ -5,6 +5,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\marti.desktop-hbvcdfl\\onedrive\\escritorio\\coses videojoc\\unityprojectes\\ninjawallclimber\\assets\\scripts\\playerscripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playerscripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\marti.desktop-hbvcdfl\\onedrive\\escritorio\\coses videojoc\\unityprojectes\\ninjawallclimber\\assets\\scripts\\playerscripts\\playercollisiondetection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playerscripts\\playercollisiondetection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,8 +18,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PlayerCollisionDetection.cs",
+              "DocumentMoniker": "C:\\Users\\marti.DESKTOP-HBVCDFL\\OneDrive\\Escritorio\\Coses Videojoc\\UnityProjectes\\NinjaWallClimber\\Assets\\Scripts\\PlayerScripts\\PlayerCollisionDetection.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerScripts\\PlayerCollisionDetection.cs",
+              "ToolTip": "C:\\Users\\marti.DESKTOP-HBVCDFL\\OneDrive\\Escritorio\\Coses Videojoc\\UnityProjectes\\NinjaWallClimber\\Assets\\Scripts\\PlayerScripts\\PlayerCollisionDetection.cs",
+              "RelativeToolTip": "Assets\\Scripts\\PlayerScripts\\PlayerCollisionDetection.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-03T16:23:12.358Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -24,9 +41,9 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerScripts\\PlayerController.cs",
               "ToolTip": "C:\\Users\\marti.DESKTOP-HBVCDFL\\OneDrive\\Escritorio\\Coses Videojoc\\UnityProjectes\\NinjaWallClimber\\Assets\\Scripts\\PlayerScripts\\PlayerController.cs",
               "RelativeToolTip": "Assets\\Scripts\\PlayerScripts\\PlayerController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAyAAAAAAAAAA==",
+              "ViewState": "AgIAAIIAAAAAAAAAAAAAwHUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-01T17:36:12.766Z",
+              "WhenOpened": "2026-07-03T16:22:44.764Z",
               "EditorCaption": ""
             }
           ]
